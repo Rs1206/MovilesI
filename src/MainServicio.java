@@ -1,80 +1,76 @@
 import java.util.Scanner;
 
 public class MainServicio {
-    public static Scanner entrada = new Scanner(System.in);
-    public static double dineroFacturado = 0;
-    public static int serviciosRegistrados = 0;
-
+    public static Scanner scanner = new Scanner(System.in);
     public static void main(String[] args) {
         mostrarMenu();
-        entrada.close();
     }
-
+    public static double dineroFacturado = 0;
+    public static int serviciosRegistrados = 0;
     public static void mostrarMenu() {
-        System.out.println("\n--- MENÚ DE SERVICIOS ---");
-        System.out.println("1. Registrar y liquidar Plan Pospago");
-        System.out.println("2. Registrar y liquidar Plan Prepago");
-        System.out.println("3. Salir");
-        System.out.print("Seleccione una opción: ");
-        int opcion = entrada.nextInt();
-        entrada.nextLine();
+        while (true) {
+        System.out.println("\n=== Gestion de planes ===");
+        System.out.println("1. Crear factura de plan pospago");
+        System.out.println("2. Crear factura de plan prepago");
+        System.out.println("3. Cerrar el sistema");
+        System.out.print("Indique la opcion: ");
+        int opcion = scanner.nextInt();
+        scanner.nextLine();
 
         switch (opcion) {
             case 1:
             {
-                System.out.println("\nRegistro de Plan Pospago");
-                System.out.print("Código del servicio: ");
-                String codigo = entrada.nextLine();
-                System.out.print("Nombre del cliente: ");
-                String cliente = entrada.nextLine();
-                System.out.print("Costo base: ");
-                double costoBase = entrada.nextDouble();
-                System.out.print("Gigas incluidas: ");
-                int gigasIncluidas = entrada.nextInt();
-                System.out.print("Gigas consumidas: ");
-                int gigasConsumidas = entrada.nextInt();
-                System.out.print("Cargo por giga adicional: ");
-                double cargoGiga = entrada.nextDouble();
-                entrada.nextLine();
+                System.out.println("\nFactura de la linea pospago");
+                System.out.print("Referencia: ");
+                String codigo = scanner.nextLine();
+                System.out.print("Titular de la línea: ");
+                String cliente = scanner.nextLine();
+                System.out.print("Valor mensual base: ");
+                double costoBase = scanner.nextDouble();
+                System.out.print("GB Incluidos: ");
+                int gigasIncluidas = scanner.nextInt();
+                System.out.print("GB Utilizados: ");
+                int gigasConsumidas = scanner.nextInt();
+                System.out.print("Tarifa por GB adicional: ");
+                double cargoGiga = scanner.nextDouble();
+                scanner.nextLine();
 
-                PlanPospago plan = new PlanPospago(codigo, cliente, costoBase,
-                        gigasIncluidas, gigasConsumidas, cargoGiga);
+                PlanPospago plan = new PlanPospago(codigo, cliente, costoBase, gigasIncluidas, gigasConsumidas, cargoGiga);
                 plan.mostrarFactura();
-                dineroFacturado += plan.calcularTotalPagar();
+                dineroFacturado += plan.calcularTotalAPagar();
                 serviciosRegistrados++;
-                mostrarMenu();
                 break;
             }
             case 2:
             {
-                System.out.println("\nRegistro de Plan Prepago");
-                System.out.print("Código del servicio: ");
-                String codigo = entrada.nextLine();
-                System.out.print("Nombre del cliente: ");
-                String cliente = entrada.nextLine();
-                System.out.print("Costo base: ");
-                double costoBase = entrada.nextDouble();
-                System.out.print("Días de vigencia: ");
-                int diasVigencia = entrada.nextInt();
-                System.out.print("¿Aplica promoción del 10%? (true/false): ");
-                boolean aplicaPromocion = entrada.nextBoolean();
-                entrada.nextLine();
+                System.out.println("\nFactura del paquete prepago");
+                System.out.print("Referencia: ");
+                String codigo = scanner.nextLine();
+                System.out.print("Titular de la línea: ");
+                String cliente = scanner.nextLine();
+                System.out.print("Valor del paquete: ");
+                double costoBase = scanner.nextDouble();
+                System.out.print("Duración del paquete en días: ");
+                int diasVigencia = scanner.nextInt();
+                scanner.nextLine();
+                System.out.print("¿Activar descuento promocional del 10%? (true/false): ");
+                boolean aplicaPromocion = scanner.nextBoolean();
+                scanner.nextLine();
 
-                PlanPrepagoPaquete plan = new PlanPrepagoPaquete(codigo, cliente,
-                        costoBase, diasVigencia, aplicaPromocion);
+                PlanPrepagoPaquete plan = new PlanPrepagoPaquete(codigo, cliente, costoBase, diasVigencia, aplicaPromocion);
                 plan.mostrarFactura();
-                dineroFacturado += plan.calcularTotalPagar();
+                dineroFacturado += plan.calcularTotalAPagar();
                 serviciosRegistrados++;
-                mostrarMenu();
                 break;
             }
             case 3:
-                System.out.println("\nTotal de servicios registrados: " + serviciosRegistrados);
-                System.out.println("Dinero total facturado: " + dineroFacturado);
-                System.out.println("Saliendo del sistema.");
-                break;
+                System.out.println("\nServicios procesados: " + serviciosRegistrados);
+                System.out.println("Facturación acumulada: " + dineroFacturado);
+                System.out.println("La sesión ha finalizado.");
+                return;
             default:
-                System.out.println("Opción inválida. Intente de nuevo.");
+                System.out.println("Opcion no valida");
+        }
         }
     }
 }

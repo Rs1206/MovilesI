@@ -4,40 +4,37 @@ public class ServicioMovil {
     protected double costoBase;
 
     public ServicioMovil(String codigoServicio, String nombreCliente, double costoBase) {
-        this.codigoServicio = codigoServicio;
-        this.nombreCliente = nombreCliente;
+        setCodigoServicio(codigoServicio);
+        setNombreCliente(nombreCliente);
         setCostoBase(costoBase);
     }
     public String getCodigoServicio() {
         return codigoServicio;
     }
     public void setCodigoServicio(String codigoServicio) {
-        if (codigoServicio != null && !codigoServicio.isEmpty()) {
-            this.codigoServicio = codigoServicio;
-        }
+        if (codigoServicio != null && !codigoServicio.trim().isEmpty())
+        this.codigoServicio = codigoServicio.trim();
     }
     public String getNombreCliente() {
         return nombreCliente;
     }
     public void setNombreCliente(String nombreCliente) {
-        if (nombreCliente != null && !nombreCliente.isEmpty()) {
-            this.nombreCliente = nombreCliente;
-        }
+        if (nombreCliente != null && !nombreCliente.trim().isEmpty())
+        this.nombreCliente = nombreCliente.trim();
     }
     public double getCostoBase() {
         return costoBase;
     }
     public void setCostoBase(double costoBase) {
-        if (costoBase >= 15000) {
-            this.costoBase = costoBase;
-        }
+        if (costoBase >= 15000)
+        this.costoBase = costoBase;
     }
-    public double calcularTotalPagar() {
+    public double calcularTotalAPagar() {
         return costoBase * 1.19;
     }
     public void mostrarFactura() {
-        System.out.println("Código del servicio: " + codigoServicio);
-        System.out.println("Nombre del cliente: " + nombreCliente);
-        System.out.println("Costo base: " + costoBase);
+        System.out.println("Referencia: " + codigoServicio);
+        System.out.println("Titular de la línea: " + nombreCliente);
+        System.out.println("Valor base (COP): " + costoBase);
     }
 }
