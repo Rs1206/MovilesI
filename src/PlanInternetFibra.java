@@ -1,13 +1,11 @@
 public class PlanInternetFibra extends ServicioTelecomunicaciones {
     private int megasVelocidad;
     private double costoPorMega;
-
     public PlanInternetFibra(String codigoAbonado, String direccionInstalacion, int estrato, int megasVelocidad, double costoPorMega) {
         super(codigoAbonado, direccionInstalacion, estrato);
         this.megasVelocidad = megasVelocidad;
         this.costoPorMega = costoPorMega;
     }
-
     @Override
     public double calcularTarifaFinal() {
         double tarifa = megasVelocidad * costoPorMega;
@@ -18,10 +16,9 @@ public class PlanInternetFibra extends ServicioTelecomunicaciones {
         }
         return tarifa;
     }
-
     public void imprimirFactura() {
-        System.out.println("Servicio: Internet por fibra");
         imprimirDatosSuscripcion();
+        System.out.println("Servicio: Internet por fibra");
         System.out.println("Velocidad: " + megasVelocidad + " Mbps");
         System.out.println("Costo por mega: $" + String.format("%.2f", costoPorMega));
         System.out.println("Tarifa final: $" + String.format("%.2f", calcularTarifaFinal()));
